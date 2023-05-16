@@ -1,0 +1,52 @@
+{% extends "layoutfile.html" %}
+
+
+{% block body %}
+<div class="container row">
+    <div class="cols-sm-2">
+    </div>
+
+            <div class="cols-sm-8">
+                <h2 class="text-primary"> GFG User Login </h2>
+                <h4 class="">Note : fill following details !</h4>
+                {% if message %}
+                <h1 style="color: brown;">{{message}}</h1>
+
+                {% endif %}
+
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for mess in messages %}
+                    <h1 style="color: brown;">{{mess}}</h1>
+                {% endfor %}
+                {% endif %}
+
+                {% endwith %}
+                <form action="" method="post" class="form form-group">           
+                    
+                    
+                    <label>Enter user email</label>
+                    <input type="email" name="email"  class="form form-group form-control" id="email" placeholder="Enter user email"><br>
+                    <label>Enter user password</label>
+                    <input type="password" name="password"  class="form form-group form-control" id="password" placeholder="Enter user password"><br>
+                    <input type="submit" class="btn btn-outline-primary" value="Submit">
+                </form><br>
+                <div style="background-color: antiquewhite;color:blueviolet">
+                    <h2>Not register user,click here for Register </h2>
+                    <a class="btn btn-outline-primary" href="{{url_for('mainlink.signup')}}">Register here</a>
+                    
+                </div>
+                <div >
+                    <h2>Forget password </h2>
+                    <a class="btn btn-outline-primary" href="{{url_for('mainlink.forgetpassword')}}">Forget Password</a>
+                    
+                </div><br>
+
+            </div>
+
+    <div class="cols-sm-2">
+    </div>
+
+</div>
+{% endblock %}
+

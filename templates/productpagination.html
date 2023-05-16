@@ -1,0 +1,133 @@
+{% extends "layoutfile.html" %}
+
+{% block title %}
+<title>Product Pagination data</title>
+
+{% endblock %}
+
+{% block body %}
+<h1 style="background-color: aquamarine;" class="text-center">All Products details here</h1>
+
+
+<div class="container " style="margin-top: 50px;">
+
+    <div class="card  mb-3" style="padding-top: 50px;">
+        {% if message %}
+        <h1 style="color: brown;">{{message}}</h1>
+
+        {% endif %}
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for mess in messages %}
+            <h1 style="color: brown;">{{mess}}</h1>
+        {% endfor %}
+        {% endif %}
+
+        {% endwith %}
+        <div class="row">
+            <form action="{{url_for('mainlink.singledelete')}}" method="post">
+
+                {% for pr in data %}
+                <br>
+                <div class="col-md">
+                    <div class="card card  mb-3" style="background-color:rgb(247, 253, 253)">
+                        <div class="card-header">
+                            {% if session.is_authenticated %}
+                                <div class="row">
+                                <h6 >Please select checkbox if multiple delete </h6>
+                                <h2 > <input type="checkbox" id="multipledata" name="multipledata" value="{{pr.product_id}}">Select Checkbox </h2>
+                                </div>
+
+                            {% endif %}                            
+                            <h5 class="card-title"><label style="font-size: 20px; color: rgb(2, 26, 18);"><pre>Product Id  :</pre> 
+                            </label>{{pr.product_id}}</h5><br>                          
+                        
+
+                            <h5 class="card-title"><label style="font-size: 20px; color: rgb(2, 26, 18);">Handle
+                                </label>{{pr.Handle}}</h5>
+                            <p class="card-text"><label style="font-size: 20px;color: rgb(2, 26, 18);">Title
+                                </label>{{pr.Title}}</p>
+                        </div>
+                        <div class="card-header">
+                            <p class="card-text"><label style="font-size: 20px;color: rgb(2, 26, 18);">Body_HTML
+                                </label>{{pr.Body}}</p>
+                            <p class="card-text"><label style="font-size: 20px;color: rgb(2, 26, 18);">Vendor
+                                </label>{{pr.Vendor}}</p>
+                        </div>
+                        <div class="card-header">
+                            <p class="card-text"><label style="font-size: 20px;color: rgb(2, 26, 18);">Type
+                                </label>{{pr.Type}}</p>
+                            <p class="card-text"><label style="font-size: 20px;color: rgb(2, 26, 18);">Tags
+                                </label>{{pr.Tags}}</p>
+
+
+                        </div>
+                        <div class="card-header">
+                            <div class="card-text">
+                                
+                                {% if session.is_authenticated %}   
+                                
+
+                                
+                                <button class="btn btn-block btn-outline-danger " 
+                                value="{{pr.product_id}}" id="user_id" name="user_id"> Delete </button>
+
+                                
+                    
+            
+                            {% endif %}
+                                </div>
+
+                            </div>
+
+                    </div>
+                    <br>
+                </div>
+
+               
+
+                {% endfor %}
+                
+                {% if session.is_authenticated %}
+                <div class="">
+
+                    <button type="submit" class="btn btn-block btn-outline-danger "><a href="{{url_for('mainlink.multipledelete')}}">Multiple delete products </a></button>
+                    </div>
+                {% endif %}
+            </form>
+        </div>
+       
+    </div>
+
+</div>
+
+
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+    
+
+          
+
+        {% if current_page %}
+
+      <li class="page-item"><a class="page-link" href="{{ url_for('mainlink.paginationdata', page=1) }}">Current  Page</a></li>
+      {% endif %}
+
+      {% if total_pages %}
+
+      <li class="page-item"><a class="page-link" href="{{ url_for('mainlink.paginationdata', page=total_pages) }}">Last Page</a></li>
+
+      {% endif %}
+
+      {% if current_page < total_pages %}
+
+      <li class="page-item"><a class="page-link" href="{{ url_for('mainlink.paginationdata', page=current_page+1) }}">Next Page</a></li>
+
+      {% endif %}
+
+    </ul>
+  </nav>
+
+{% endblock %}

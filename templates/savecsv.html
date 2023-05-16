@@ -1,0 +1,32 @@
+{% extends "layoutfile.html" %}
+
+{% block title %}
+<title>csv file </title>
+
+{% endblock %}
+{% block body %}
+<div  >
+<form action="" method="post" class="form form-group" enctype="multipart/form-data">           
+    {% if message %}
+    <h1 style="color: brown;">{{message}}</h1>
+
+    {% endif %}
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for mess in messages %}
+        <h1 style="color: brown;">{{mess}}</h1>
+    {% endfor %}
+    {% endif %}
+
+    {% endwith %}
+            
+    <label>Enter csv file</label>
+    <input type="file" name="csvfile"  class="form form-group form-control" id="csvfile" placeholder="choose file" required><br>
+
+    <input type="submit" class="btn btn-outline-primary" value="Submit">
+</form><br>
+</div>
+
+
+{% endblock %}

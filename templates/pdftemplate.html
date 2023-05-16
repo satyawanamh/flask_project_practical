@@ -1,0 +1,28 @@
+
+
+<h1 style="background-color: blueviolet;">All Products details data csv</h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Handle</th>
+        <th scope="col">Title</th>
+        <th scope="col">Vendor</th>
+        <th scope="col">Type</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% if data %}
+    {% for dd in data %}
+      <tr>
+        
+        <td>{{dd["Handle"]}}</td>
+        <td>{{dd["Title"]}}</td>
+        <td>{{dd["Vendor"]}}</td>
+        <td>{{dd["Type"]}}</td>
+      </tr>
+      {% endfor %}
+
+    {% endif %}
+
+    </tbody>
+  </table>

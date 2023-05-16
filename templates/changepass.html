@@ -1,0 +1,64 @@
+{% extends "layoutfile.html" %}
+
+{% block title %}
+<title>Home page </title>
+
+{% endblock %}
+{% block body %}
+
+<a href="{{url_for('mainlink.logout')}}" class="btn btn-outline-danger">Logout</a>
+<hr>
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+    
+    Change Password </button> <hr>
+<br>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close " style="color: brown;" data-dismiss="modal">&times;</button>
+        <hr><br>
+        <h4 class="modal-title">Change password</h4>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post" class="form form-group">           
+          {% if message %}
+          <h1 style="color: brown;">{{message}}</h1>
+
+          {% endif %}
+
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          {% for mess in messages %}
+              <h1 style="color: brown;">{{mess}}</h1>
+          {% endfor %}
+          {% endif %}
+
+          {% endwith %}
+                    
+            <label>Enter user old password</label>
+            <input type="password" name="oldpassword"  class="form form-group form-control" id="oldpassword" placeholder="Enter old password"><br>
+            <label>Enter user new password</label>
+            <input type="password" name="newpassword"  class="form form-group form-control" id="newpassword" placeholder="Enter new password"><br>
+            <input type="submit" class="btn btn-outline-primary" value="Submit">
+        </form><br>
+      </div>
+      
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+{% endblock %}
